@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convite de Verão ☀️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 25px 15px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #173b45;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .convite {
+      padding: 30px 22px;
+      border-radius: 25px;
+      text-align: center;
+      color: #173b45;
+
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.20),
+          rgba(255, 255, 255, 0.20)
+        ),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      box-shadow: 0 12px 35px rgba(0, 60, 80, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .icone {
+      font-size: 45px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      color: #087e8b;
+      font-size: 32px;
+      margin: 8px 0;
+    }
+
+    .subtitulo {
+      font-size: 17px;
+      margin-bottom: 25px;
+    }
+
+    .detalhes {
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 20px 0;
+      line-height: 1.7;
+    }
+
+    .detalhes p {
+      margin: 8px 0;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin: 15px 0 7px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #b5d9d9;
+      border-radius: 10px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #173b45;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .sim {
+      background: #078b70;
+      color: white;
+    }
+
+    .nao {
+      background: #ffffff;
+      color: #b83245;
+      border: 1px solid #e9a5ad;
+    }
+
+    .rodape {
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 380px) {
+      .convite {
+        padding: 24px 16px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="convite">
+      <div class="icone">☀️🌴🌊</div>
+
+      <h1>Convite de Verão!</h1>
+
+      <p class="subtitulo">
+        Prepare-se para um dia de diversão,
+        sol e boas companhias!
+      </p>
+
+      <div class="detalhes">
+        <p>📅 <strong>Data:</strong> 22 de novembro</p>
+        <p>⏰ <strong>Horário:</strong> A partir das 11 horas</p>
+        <p>📍 <strong>Local:</strong> Espaço Kimura</p>
+        <p>🏖️ <strong>Endereço:</strong> RLS, Quadra 05, Lote 06</p>
+      </div>
+
+      <h2>Você vai? </h2>
+      <p>Confirme sua presença abaixo!</p>
+
+      <form id="formulario">
+        <label for="nome">Seu nome:</label>
+        <input
+          type="text"
+          id="nome"
+          placeholder="Digite seu nome"
+          required
+        >
+
+        <label for="acompanhante">
+          Vai levar alguém? (opcional)
+        </label>
+        <input
+          type="text"
+          id="acompanhante"
+          placeholder="Nome do acompanhante"
+        >
+
+        <button type="submit" class="sim">
+          ☀️ Sim, eu vou!
+        </button>
+
+        <button type="button" class="nao" id="nao">
+          Não poderei ir
+        </button>
+      </form>
+
+      <p class="rodape">
+        Esperamos você para curtir esse dia especial! 🌴
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const telefone = "556282248843";
+
+    function enviarWhatsApp(status) {
+      const nome =
+        document.getElementById("nome").value.trim();
+
+      const acompanhante =
+        document.getElementById("acompanhante").value.trim();
+
+      if (!nome) {
+        alert("Digite seu nome primeiro!");
+        document.getElementById("nome").focus();
+        return;
+      }
+
+      let mensagem =
+        "☀️ Confirmação do Convite de Verão\n\n" +
+        "Nome: " + nome + "\n" +
+        "Resposta: " + status + "\n" +
+        "Evento: 22 de novembro, a partir das 11 horas\n" +
+        "Local: Espaço Kimura\n" +
+        "Endereço: RLS, Quadra 05, Lote 06";
+
+      if (status === "Vou" && acompanhante) {
+        mensagem += "\nAcompanhante: " + acompanhante;
+      }
+
+      const url =
+        "https://wa.me/" + telefone +
+        "?text=" + encodeURIComponent(mensagem);
+
+      window.open(url, "_blank");
+    }
+
+    document
+      .getElementById("formulario")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+        enviarWhatsApp("Vou");
+      });
+
+    document
+      .getElementById("nao")
+      .addEventListener("click", function() {
+        enviarWhatsApp("Não poderei ir");
+      });
+  </script>
+</body>
+</html>
+
